@@ -1,0 +1,23 @@
+{
+  "name": "@deepseek-ai/dsh-forensic",
+  "version": "0.1.0",
+  "description": "Portable forensic bundle: mounts the forensic layer rows over a base-backed profile.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "tsk-fsstat",
+  "name": "TSK fsstat 文件系统信息",
+  "version": "4.14.0",
+  "description": "显示文件系统元信息（The Sleuth Kit fsstat）：类型、块大小、inode 范围等。",
+  "executable": { "windows": "../bin/fsstat.exe" },
+  "args": [
+    { "name": "offset", "type": "number", "flag": "-o", "description": "分区起始扇区（可选，由 mmls 得到）" },
+    { "name": "image", "type": "string", "required": true, "description": "镜像文件路径（dd/E01 等）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 300000
+}

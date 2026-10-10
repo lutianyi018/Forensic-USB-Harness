@@ -1,0 +1,17 @@
+{
+  "name": "@deepseek-ai/dsh-forensic-policy",
+  "version": "0.1.0",
+  "description": "Forensic policy: a monotonic tool guard that keeps the evidence zone read-only.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2"
+  }
+}

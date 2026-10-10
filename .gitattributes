@@ -1,0 +1,17 @@
+# 默认按文本处理、统一换行
+* text=auto
+
+# PowerShell 脚本带 UTF-8 BOM，保持 CRLF（Windows 解析中文所需）
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# JSON 清单保持 LF、无 BOM（Node JSON.parse 不容忍 BOM）
+*.json text eol=lf
+
+# 二进制
+*.exe binary
+*.dll binary
+*.zip binary
+*.png binary
+*.svg text

@@ -1,0 +1,50 @@
+# 取证 bundle：便携取证层的组合行。
+#
+# 在 base 与 web-app 之后挂载。注意 Web 档位的分工：
+#   - 「主机层」：工具注册表、沙箱/审批、持久化、模型路由，以及本 bundle 的取证服务；
+#   - 「agent 层」：persona、fs、skill、plan-mode 等由 **agent preset** 组合。
+# 因此取证的角色与技能不在这里覆盖 host 行，而是放在取证预设
+# （data/dsh/.agent-presets/forensic/）里；本 bundle 只做主机层的事，并把默认预设指向它。
+
+- insert:
+    # 取证层核心：解析盘上三区（工作区 / 固证区 / 案件区）与设备身份目录。
+    - id: forensic-core
+      name: '@deepseek-ai/dsh-forensic-core'
+      config:
+        root: !!js process.env.FORENSIC_ROOT ?? ''
+        productVersion: '0.1.0'
+
+    # 固证区只读守卫：单调拒绝任何写入/改动固证区的工具调用，读类放行。
+    - id: forensic-policy
+      name: '@deepseek-ai/dsh-forensic-policy'
+      config:
+        evidenceRoot: !!js process.env.FORENSIC_EVIDENCE ?? ''
+        denyShellTouch: true
+
+    # 操作员登录：服务端校验姓名 + 身份证号 + 密码/PIN，并在主界面加载前做门禁。
+    - id: forensic-auth
+      name: '@deepseek-ai/dsh-forensic-auth'
+      config:
+        enabled: true
+        operatorsPath: ''
+        product: 'ForensicDSH'
+        sessionTtlMs: 43200000
+
+    # 取证工具总线（主机层）：扫描 forensic/tools/** 的清单，把每个工具注册成模型工具，
+    # 注册进入主机层全局工具表，因此对所有会话可见。
+    - id: forensic-tools
+      name: '@deepseek-ai/dsh-forensic-tools'
+      config:
+        toolsRoot: !!js process.env.FORENSIC_TOOLS ?? (process.cwd() + '/forensic/tools')
+        maxDepth: 4
+        defaultTimeoutMs: 300000
+        reserveBytes: 268435456
+
+    # 取证侧边栏面板（客户端插件）：宿主半侧提供 /forensic/info，浏览器半侧渲染面板。
+    - id: ui-forensic
+      name: '@deepseek-ai/dsh-client-ui-forensic'
+
+# 覆盖主机层的 agent-presets 行：把默认预设指向取证预设（后层按 id 覆盖 config）。
+- id: agent-presets
+  config:
+    default: forensic

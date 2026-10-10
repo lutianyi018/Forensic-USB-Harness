@@ -1,0 +1,71 @@
+# 取证 agent preset：数字取证助手这一「agent 层」的组合。
+#
+# 与 standard 预设的关键差异：
+#   - persona 换成取证助手，写死结论分级与固证区只读纪律；
+#   - 技能提供方指向盘上的 forensic/skills 目录；
+#   - **不含** pwsh / bash（无任意 shell）、**不含** web（无联网检索）、不含子代理与工作流。
+# 取证工具（forensic_*）由主机层的 dsh-forensic-tools 注册进全局工具表，对所有会话可见。
+
+# ── 身份与纪律 ──────────────────────────────────────────────────────────────
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    suffix: 你的工作目录是 {{cwd}}。原始证据位于「固证区」，只读。
+    prefix: |
+      你是「ForensicDSH 便携取证工作站」的数字取证助手，协助持证操作员在合法授权范围内对被取证设备做取证分析。
+
+      必须遵守：
+      1. 结论分级：区分 FACT（事实）/ OBSERVATION（观察）/ ANALYSIS（分析）/ INFERENCE（推断）/ CONCLUSION（结论），不得把推断写成事实。
+      2. 固证区只读：原始证据只读，绝不修改、删除或移动；所有分析产物写入工作区。
+      3. 只用已注册的取证工具（forensic_* 工具，以及 read / glob / grep 等读类工具）；不得请求任意 shell 或未声明的可执行文件。
+      4. 可追溯：结论必须引用具体证据路径、工具名与产物文件。
+      5. 先计划后执行：接到任务先给出调查计划（步骤 + 拟用工具），待操作员确认后再执行。
+
+- id: agent-instructions
+  name: '@deepseek-ai/dsh-agent-instructions'
+  config:
+    maxBytes: 65536
+
+# ── 读类文件工具（无写入 shell；写由 write/edit 落在工作区）──────────────────
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+
+- id: tool-fs-search
+  name: '@deepseek-ai/dsh-tool-fs-search'
+  config:
+    sampleOverCapGlobResults: false
+
+# ── 技能：指向盘上的取证技能目录 ────────────────────────────────────────────
+- id: skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+  config:
+    customSkillDirs:
+      - forensic/skills
+
+- id: tool-skill
+  name: '@deepseek-ai/dsh-tool-skill'
+
+# ── 计划模式：先出计划，确认后执行 ──────────────────────────────────────────
+- id: planning
+  name: cordis:group
+  group: true
+  isolate:
+    planMode: true
+  config:
+    - id: plan-mode
+      name: '@deepseek-ai/dsh-plan-mode'
+      config:
+        section: |
+          你处于计划模式。在 exit_plan_mode 成功或操作员切换会话模式前，保持计划模式。
+          先进行调查式阅读与检索，把计划建立在真实证据之上；不要执行改动。
+          计划要决策完整：目标与成功标准、步骤、拟用工具、引用到的证据路径、边界与失败处理。
+          就绪后调用 exit_plan_mode 提交计划；计划获批后才执行。
+
+# ── 任务清单与提问 ──────────────────────────────────────────────────────────
+- id: tool-todo
+  name: '@deepseek-ai/dsh-tool-todo'
+  config:
+    allowParallelInProgress: true
+
+- id: tool-ask-user
+  name: '@deepseek-ai/dsh-tool-ask-user'

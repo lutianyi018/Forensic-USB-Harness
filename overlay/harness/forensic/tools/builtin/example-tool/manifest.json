@@ -1,0 +1,28 @@
+{
+  "id": "example-tool",
+  "name": "示例取证工具",
+  "version": "1.0.0",
+  "description": "占位示例：把 example-tool.exe 放到本目录后即可被注册为工具 forensic_example_tool。",
+  "executable": {
+    "windows": "example-tool.exe"
+  },
+  "args": [
+    {
+      "name": "evidence_path",
+      "type": "string",
+      "required": true,
+      "description": "证据文件或目录路径"
+    },
+    {
+      "name": "output_dir",
+      "type": "string",
+      "required": false,
+      "description": "输出目录（可选）"
+    }
+  ],
+  "requires_admin": false,
+  "network": {
+    "allowed": false
+  },
+  "timeout_ms": 300000
+}

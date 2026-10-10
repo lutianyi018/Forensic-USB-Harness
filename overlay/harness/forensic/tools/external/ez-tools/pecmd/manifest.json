@@ -1,0 +1,14 @@
+{
+  "id": "pecmd",
+  "name": "PECmd (Prefetch 解析)",
+  "version": "2024",
+  "description": "解析 Prefetch（.pf）程序执行痕迹（Eric Zimmerman PECmd）。需将 PECmd.exe 及其依赖放入本目录。",
+  "executable": { "windows": "PECmd.exe" },
+  "args": [
+    { "name": "file", "type": "string", "required": true, "flag": "-f", "description": "单个 .pf 文件路径" },
+    { "name": "csvDir", "type": "string", "flag": "--csv", "description": "CSV 输出目录（可选）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 300000
+}

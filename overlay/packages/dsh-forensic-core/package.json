@@ -1,0 +1,17 @@
+{
+  "name": "@deepseek-ai/dsh-forensic-core",
+  "version": "0.1.0",
+  "description": "Forensic layer core: three-zone layout (workspace / evidence / cases), device identity and forensic id grammar.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2"
+  }
+}

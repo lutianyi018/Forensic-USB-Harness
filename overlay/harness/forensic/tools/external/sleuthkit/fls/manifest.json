@@ -1,0 +1,14 @@
+{
+  "id": "tsk-fls",
+  "name": "TSK fls 目录列举",
+  "version": "4.14.0",
+  "description": "列出镜像/文件系统内的目录与文件（The Sleuth Kit fls）。先用 mmls 查分区起始扇区，再把它作为 offset 传入。",
+  "executable": { "windows": "../bin/fls.exe" },
+  "args": [
+    { "name": "offset", "type": "number", "flag": "-o", "description": "分区起始扇区（可选，由 mmls 得到）" },
+    { "name": "image", "type": "string", "required": true, "description": "镜像文件路径（dd/E01 等）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 600000
+}

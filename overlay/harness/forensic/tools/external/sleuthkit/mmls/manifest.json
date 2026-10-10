@@ -1,0 +1,13 @@
+{
+  "id": "tsk-mmls",
+  "name": "TSK mmls 分区表",
+  "version": "4.14.0",
+  "description": "显示镜像的分区表（The Sleuth Kit mmls），用于获取各分区的起始扇区 offset。",
+  "executable": { "windows": "../bin/mmls.exe" },
+  "args": [
+    { "name": "image", "type": "string", "required": true, "description": "镜像文件路径（dd/E01 等）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 300000
+}

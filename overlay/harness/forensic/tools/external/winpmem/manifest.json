@@ -1,0 +1,14 @@
+{
+  "id": "winpmem",
+  "name": "WinPmem 内存采集",
+  "version": "4.0",
+  "description": "物理内存采集（WinPmem，需管理员）。command 固定填 acquire；filename 为内存镜像输出路径（建议写到案件区，体量可达数 GB）。",
+  "executable": { "windows": "winpmem.exe" },
+  "args": [
+    { "name": "command", "type": "string", "required": true, "description": "子命令，固定填 acquire（采集内存镜像）" },
+    { "name": "filename", "type": "string", "required": true, "description": "内存镜像输出路径，如 D:\\案件区\\mem.raw" }
+  ],
+  "requires_admin": true,
+  "network": { "allowed": false },
+  "timeout_ms": 1800000
+}

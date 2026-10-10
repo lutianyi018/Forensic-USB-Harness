@@ -1,0 +1,14 @@
+{
+  "id": "osquery",
+  "name": "osquery 本机状态查询",
+  "version": "5.23.1",
+  "description": "用 SQL 查询【本机实时状态】并返回 JSON。请始终把 --json 设为 true。常用查询：进程 SELECT pid,name,path,cmdline FROM processes; · 服务 SELECT name,display_name,status,start_type,path FROM services; · 网络连接 SELECT pid,local_address,local_port,remote_address,remote_port,state FROM process_open_sockets; · 登录用户 SELECT user,host,tty,time FROM logged_in_users; · 本地账户 SELECT username,description,uid FROM users; · 开机自启(注册表) SELECT key,name,path,type FROM registry WHERE key LIKE '%Run%'; · 计划任务 SELECT name,action,path,enabled FROM scheduled_tasks; · 已安装软件 SELECT name,version,publisher FROM programs; · 启动项(服务/驱动) SELECT name,path,start_type FROM services WHERE start_type='AUTO_START';",
+  "executable": { "windows": "osqueryi.exe" },
+  "args": [
+    { "name": "--json", "type": "boolean", "description": "以 JSON 数组输出（务必设为 true）" },
+    { "name": "query", "type": "string", "required": true, "description": "要执行的 osquery SQL，例如 SELECT pid,name,path FROM processes;" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 120000
+}

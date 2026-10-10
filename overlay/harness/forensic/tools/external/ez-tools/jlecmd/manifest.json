@@ -1,0 +1,14 @@
+{
+  "id": "jlecmd",
+  "name": "JLECmd (Jump List 解析)",
+  "version": "2024",
+  "description": "解析 Jump List 最近访问痕迹（Eric Zimmerman JLECmd）。需将 JLECmd.exe 及其依赖放入本目录。",
+  "executable": { "windows": "JLECmd.exe" },
+  "args": [
+    { "name": "file", "type": "string", "required": true, "flag": "-f", "description": "Jump List 文件路径（也支持 -d 目录，见其帮助）" },
+    { "name": "csvDir", "type": "string", "flag": "--csv", "description": "CSV 输出目录（可选）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 300000
+}

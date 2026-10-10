@@ -1,0 +1,15 @@
+{
+  "id": "tsk-icat",
+  "name": "TSK icat 文件提取",
+  "version": "4.14.0",
+  "description": "按 inode 号提取文件内容到标准输出（The Sleuth Kit icat）。inode 号由 fls 得到。",
+  "executable": { "windows": "../bin/icat.exe" },
+  "args": [
+    { "name": "offset", "type": "number", "flag": "-o", "description": "分区起始扇区（可选，由 mmls 得到）" },
+    { "name": "image", "type": "string", "required": true, "description": "镜像文件路径（dd/E01 等）" },
+    { "name": "inode", "type": "string", "required": true, "description": "inode 号（由 fls 得到）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 600000
+}

@@ -1,0 +1,14 @@
+{
+  "id": "evtxecmd",
+  "name": "EvtxECmd (事件日志解析)",
+  "version": "2024",
+  "description": "解析 Windows EVTX 事件日志为 CSV/JSON（Eric Zimmerman EvtxECmd）。需将 EvtxECmd.exe 及其依赖放入本目录。",
+  "executable": { "windows": "EvtxECmd.exe" },
+  "args": [
+    { "name": "file", "type": "string", "required": true, "flag": "-f", "description": "单个 .evtx 文件路径" },
+    { "name": "csvDir", "type": "string", "flag": "--csv", "description": "CSV 输出目录（可选）" }
+  ],
+  "requires_admin": false,
+  "network": { "allowed": false },
+  "timeout_ms": 600000
+}

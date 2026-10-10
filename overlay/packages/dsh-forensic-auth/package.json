@@ -1,0 +1,20 @@
+{
+  "name": "@deepseek-ai/dsh-forensic-auth",
+  "version": "0.1.0",
+  "description": "Forensic operator login: server-side credential verification (name + id card + password/PIN) with an index-tap UI gate.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./verify": {
+      "default": "./lib/verify.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2"
+  }
+}
