@@ -4,7 +4,8 @@
 独立签入（姓名 + 身份证 + 密码）、工作区与**固证区**分离（固证区 AI 只读）、内置取证角色与技能、
 可一键发放带独立设备身份的新盘。
 
-> **声明**：本仓库是社区**改装层（overlay + 脚本 + 文档）**，不含上游任何源码，
+> **声明**：本仓库是社区**改装层（overlay + 脚本 + 文档）**，不含上游任何源码
+> 
 > **使用前准备**（本仓库不含动辄数百 MB 的便携运行时）：
 > 到 [USB-Harness Releases](https://github.com/tmy2623231/USB-Harness/releases/latest) 下载
 > `USB-Harness-with-runtime.zip`，解压后放到本目录同级，成为 `<盘根>\USB-Harness-with-runtime`。
